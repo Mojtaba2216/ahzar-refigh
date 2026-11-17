@@ -3,8 +3,8 @@ import { getDatabase, ref, push, onChildAdded, onValue, set, serverTimestamp, re
 import { getMessaging, getToken, onMessage } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging.js';
 
 // Firebase Console > Project settings: paste your web app values here.
-const firebaseConfig = { apiKey:'YOUR_API_KEY', authDomain:'YOUR_PROJECT.firebaseapp.com', databaseURL:'https://YOUR_PROJECT-default-rtdb.firebaseio.com', projectId:'YOUR_PROJECT', storageBucket:'YOUR_PROJECT.appspot.com', messagingSenderId:'YOUR_SENDER_ID', appId:'YOUR_APP_ID' };
-const vapidKey='YOUR_WEB_PUSH_CERTIFICATE_KEY_PAIR';
+const firebaseConfig = { apiKey:'AIzaSyDlQPlFfAmTEw837KfuVxSdOWvPrClN4Z0', authDomain:'ahzar-refigh.firebaseapp.com', databaseURL:'https://ahzar-refigh-default-rtdb.firebaseio.com', projectId:'ahzar-refigh', storageBucket:'ahzar-refigh.firebasestorage.app', messagingSenderId:'143389585864', appId:'1:143389585864:web:4f4cc446fb5c6e1fbdd0fd' };
+const vapidKey='BLrjr7JdTI4__Xtuzy6QcD8BW13fGL6rCWTvzt983WOXzR95pxzNisDlvHoUnsj0ynmHg64_z1bO-cXLerKy0SU';
 const demoMode=firebaseConfig.apiKey.startsWith('YOUR_');
 let db=null, messaging=null, currentUser='', uid=crypto.randomUUID(), messagesRef=null, localMessages=[], deferredInstall=null;
 const USERS=['فردین','دوست ۱','دوست ۲','دوست ۳','دوست ۴'];
