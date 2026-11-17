@@ -14,6 +14,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: ''
+      - name: Install Android SDK packages
+        run: SDK=$(find "$ANDROID_HOME" -name sdkmanager -type f | head -1); yes | "$SDK" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
       - name: Install Capacitor
         run: npm init -y && npm install @capacitor/core @capacitor/cli @capacitor/android
       - name: Configure Capacitor
