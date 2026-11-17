@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>احضار رفیق</title>
+</head>
+<body>
+  <main class="shell">
+    <section class="card" id="joinCard">
+      <div class="brand"><span class="brand-mark">✦</span><span>احضار رفیق</span></div>
+      <h1>تو کی هستی؟</h1>
+      <p class="muted">اسمت را انتخاب کن تا اعلان‌ها برای خودت و چهار نفر دیگر درست ارسال شوند.</p>
+      <label for="userInput">نام شما</label>
+      <select id="userInput"><option value="">انتخاب نام</option><option>فردین</option><option>دوست ۱</option><option>دوست ۲</option><option>دوست ۳</option><option>دوست ۴</option></select>
+      <button id="joinBtn" class="primary full">ورود به اپ</button>
+      <p id="joinError" class="error" role="alert"></p>
+    </section>
+
+    <section class="card hidden" id="appCard">
+      <header class="topbar"><div><div class="eyebrow">کاربر فعال</div><strong id="userLabel"></strong></div><button id="leaveBtn" class="icon-btn" title="تغییر کاربر">↩</button></header>
+      <div id="permissionNotice" class="notice hidden"><span>برای دریافت پیام حتی وقتی برنامه باز نیست، اعلان‌ها را فعال کن.</span><button id="notifyBtn">فعال‌سازی اعلان</button></div>
+      <label for="targetInput">ارسال به</label><select id="targetInput"><option value="">انتخاب دوست</option></select><div id="status" class="status"><span class="dot"></span><span>در حال اتصال…</span></div>
+      <div class="buttons">
+        <button class="call-btn smoke" data-kind="smoke"><span class="emoji">🚬</span><span>سیگار می‌کشی؟</span><small>ارسال به دوست</small></button>
+        <button class="call-btn have" data-kind="have"><span class="emoji">📦</span><span>سیگار داری؟</span><small>ارسال به دوست</small></button>
+      </div>
+      <div class="reply-box"><div class="reply-title">پاسخ سریع</div><button id="replyBtn" class="reply-btn">آره آره ✓</button></div>
+      <div class="history-head"><span>آخرین پیام‌ها</span><button id="clearBtn" class="link-btn">پاک کردن</button></div>
+      <div id="messages" class="messages"><div class="empty">هنوز پیامی نیست.</div></div>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
