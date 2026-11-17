@@ -14,101 +14,18 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Install Capacitor
+        run: npm init -y && npm install @capacitor/core @capacitor/cli @capacitor/android
+      - name: Configure Capacitor
+        run: echo '{"appId":"com.mohtaba.ahzarrefigh","appName":"احضار رفیق","webDir":"."}' > capacitor.config.json
       - name: Create Android project
-        run: |
-          mkdir -p app/src/main/java/com/mojtaba/ahzarrefigh app/src/main/res/values
-          echo cGx1Z2luTWFuYWdlbWVudCB7IHJlcG9zaXRvcmllcyB7IGdvb2dsZSgpOyBtYXZlbkNlbnRyYWwoKTsgZ3JhZGxlUGx1Z2luUG9ydGFsKCkgfSB9CmRlcGVuZGVuY3lSZXNvbHV0aW9uTWFuYWdlbWVudCB7IHJlcG9zaXRvcmllc01vZGUuc2V0KFJlcG9zaXRvcmllc01vZGUuRkFJTF9PTl9QUk9KRUNUX1JFUE9TKTsgcmVwb3NpdG9yaWVzIHsgZ29vZ2xlKCk7IG1hdmVuQ2VudHJhbCgpIH0gfQpyb290UHJvamVjdC5uYW1lPSdBaHphclJlZmlnaCc7IGluY2x1ZGUgJzphcHAnCg== | base64 -d > settings.gradle
-          echo cGx1Z2lucyB7IGlkICdjb20uYW5kcm9pZC5hcHBsaWNhdGlvbicgdmVyc2lvbiAnOC42LjEnIGFwcGx5IGZhbHNlIH0K | base64 -d > build.gradle
-          echo cGx1Z2lucyB7IGlkICdjb20uYW5kcm9pZC5hcHBsaWNhdGlvbicgfQphbmRyb2lkIHsgbmFtZXNwYWNlICdjb20ubW9odGFiYS5haHphcnJlZmlnaCc7IGNvbXBpbGVTZGsgMzUKIGRlZmF1bHRDb25maWcgeyBhcHBsaWNhdGlvbklkICdjb20ubW9odGFiYS5haHphcnJlZmlnaCc7IG1pblNkayAyMzsgdGFyZ2V0U2RrIDM1OyB2ZXJzaW9uQ29kZSAxOyB2ZXJzaW9uTmFtZSAnMS4wJyB9Cn0K | base64 -d > app/build.gradle
-          echo PG1hbmlmZXN0IHhtbG5zOmFuZHJvaWQ9Imh0dHA6Ly9zY2hlbWFzLmFuZHJvaWQuY29tL2Fway9yZXMvYW5kcm9pZCI+PHVzZXMtcGVybWlzc2lvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQucGVybWlzc2lvbi5JTlRFUk5FVCIvPjx1c2VzLXBlcm1pc3Npb24gYW5kcm9pZDpuYW1lPSJhbmRyb2lkLnBlcm1pc3Npb24uUE9TVF9OT1RJRklDQVRJT05TIi8+PGFwcGxpY2F0aW9uIGFuZHJvaWQ6dGhlbWU9IkBzdHlsZS9BcHBUaGVtZSIgYW5kcm9pZDpsYWJlbD0i2KfYrdi22KfYsSDYsdmB24zZgiI+PGFjdGl2aXR5IGFuZHJvaWQ6bmFtZT0iLk1haW5BY3Rpdml0eSIgYW5kcm9pZDpleHBvcnRlZD0idHJ1ZSI+PGludGVudC1maWx0ZXI+PGFjdGlvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQuaW50ZW50LmFjdGlvbi5NQUlOIi8+PGNhdGVnb3J5IGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5pbnRlbnQuY2F0ZWdvcnkuTEFVTkNIRVIiLz48L2ludGVudC1maWx0ZXI+PC9hY3Rpdml0eT48L2FwcGxpY2F0aW9uPjwvbWFuaWZlc3Q+Cg== | base64 -d > app/src/main/AndroidManifest.xml
-          echo PHJlc291cmNlcz48c3R5bGUgbmFtZT0iQXBwVGhlbWUiIHBhcmVudD0iYW5kcm9pZDpzdHlsZS9UaGVtZS5NYXRlcmlhbC5MaWdodC5Ob0FjdGlvbkJhciI+PGl0ZW0gbmFtZT0iYW5kcm9pZDpmb250RmFtaWx5Ij5zYW5zPC9pdGVtPjxpdGVtIG5hbWU9ImFuZHJvaWQ6Y29sb3JBY2NlbnQiPiMyNTYzZWI8L2l0ZW0+PC9zdHlsZT48L3Jlc291cmNlcz4K | base64 -d > app/src/main/res/values/styles.xml
-          echo cGFja2FnZSBjb20ubW9odGFiYS5haHphcnJlZmlnaDsKaW1wb3J0IGFuZHJvaWQuYXBwLio7aW1wb3J0IGFuZHJvaWQub3MuKjtpbXBvcnQgYW5kcm9pZC5NYW5pZmVzdDtpbXBvcnQgYW5kcm9pZC5jb250ZW50LnBtLlBhY2thZ2VNYW5hZ2VyO2ltcG9ydCBhbmRyb2lkLndlYmtpdC4qO2ltcG9ydCBhbmRyb2lkLmdyYXBoaWNzLkNvbG9yOwpwdWJsaWMgY2xhc3MgTWFpbkFjdGl2aXR5IGV4dGVuZHMgQWN0aXZpdHl7cHVibGljIHZvaWQgb25DcmVhdGUoQnVuZGxlIGIpe3N1cGVyLm9uQ3JlYXRlKGIpO2lmKEJ1aWxkLlZFUlNJT04uU0RLX0lOVD49MzMmJmNoZWNrU2VsZlBlcm1pc3Npb24oTWFuaWZlc3QucGVybWlzc2lvbi5QT1NUX05PVElGSUNBVElPTlMpIT1QYWNrYWdlTWFuYWdlci5QRVJNSVNTSU9OX0dSQU5URUQpcmVxdWVzdFBlcm1pc3Npb25zKG5ldyBTdHJpbmdbXXtNYW5pZmVzdC5wZXJtaXNzaW9uLlBPU1RfTk9USUZJQ0FUSU9OU30sNyk7V2ViVmlldyB3PW5ldyBXZWJWaWV3KHRoaXMpO3cuc2V0QmFja2dyb3VuZENvbG9yKENvbG9yLnJnYigxMSwxNiwzMikpO3cuZ2V0U2V0dGluZ3MoKS5zZXRKYXZhU2NyaXB0RW5hYmxlZCh0cnVlKTt3LmdldFNldHRpbmdzKCkuc2V0RG9tU3RvcmFnZUVuYWJsZWQodHJ1ZSk7dy5zZXRXZWJWaWV3Q2xpZW50KG5ldyBXZWJWaWV3Q2xpZW50KCkpO3cubG9hZFVybCgiaHR0cHM6Ly9tb2p0YWJhMjIxNi5naXRodWIuaW8vYWh6YXItcmVmaWdoLyIpO3NldENvbnRlbnRWaWV3KHcpO319Cg== | base64 -d > app/src/main/java/com/mojtaba/ahzarrefigh/MainActivity.java
-      - uses: gradle/gradle-build-action@v3
+        run: npx cap add android
+      - name: Build APK
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: assembleDebug
+          build-root-directory: android
       - uses: actions/upload-artifact@v4
         with:
           name: ahzar-refigh-apk
-          path: app/build/outputs/apk/debug/app-debug.apkname: Build Android APK
-on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-permissions:
-  contents: read
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '17'
-      - name: Create Android project
-        shell: bash
-        run: |
-          mkdir -p app/src/main/java/com/mojtaba/ahzarrefigh app/src/main/res/values
-          cat > settings.gradle <<'EOT'
-          pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
-          dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }
-          rootProject.name='AhzarRefigh'; include ':app'
-          EOT
-          cat > build.gradle <<'EOT'
-          plugins { id 'com.android.application' version '8.6.1' apply false }
-          EOT
-          cat > app/build.gradle <<'EOT'
-          plugins { id 'com.android.application' }
-          android { namespace 'com.mohtaba.ahzarrefigh'; compileSdk 35
-            defaultConfig { applicationId 'com.mohtaba.ahzarrefigh'; minSdk 23; targetSdk 35; versionCode 1; versionName '1.0' }
-          }
-          EOT
-          cat > app/src/main/AndroidManifest.xml <<'EOT'
-          <manifest xmlns:android="http://schemas.android.com/apk/res/android"><uses-permission android:name="android.permission.INTERNET"/><uses-permission android:name="android.permission.POST_NOTIFICATIONS"/><application android:theme="@style/AppTheme" android:label="احضار رفیق"><activity android:name=".MainActivity" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity></application></manifest>
-          EOT
-          printf '%s' '<resources><style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar"><item name="android:fontFamily">sans</item><item name="android:colorAccent">#2563eb</item></style></resources>' > app/src/main/res/values/styles.xml
-          cat > app/src/main/java/com/mojtaba/ahzarrefigh/MainActivity.java <<'EOT'
-          package com.mohtaba.ahzarrefigh;
-          import android.app.*;import android.os.*;import android.Manifest;import android.content.pm.PackageManager;import android.webkit.*;import android.graphics.Color;
-          public class MainActivity extends Activity{public void onCreate(Bundle b){super.onCreate(b);if(Build.VERSION.SDK_INT>=33&&checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)!=PackageManager.PERMISSION_GRANTED)requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS},7);WebView w=new WebView(this);w.setBackgroundColor(Color.rgb(11,16,32));w.getSettings().setJavaScriptEnabled(true);w.getSettings().setDomStorageEnabled(true);w.setWebViewClient(new WebViewClient());w.loadUrl("https://mojtaba2216.github.io/ahzar-refigh/");setContentView(w);}}
-          EOT
-      - uses: gradle/gradle-build-action@v3
-        with:
-          arguments: assembleDebug
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ahzar-refigh-apk
-          path: app/build/outputs/apk/debug/app-debug.apkname: Build Android APK
-on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-permissions:
-  contents: read
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '17'
-      - name: Install Android SDK
-        run: yes | /usr/local/lib/android/sdk/cmdline-tools/16.0/bin/sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
-      - name: Create Android project
-        run: |
-          mkdir -p app/src/main/java/com/mojtaba/ahzarrefigh app/src/main/res/values
-          echo cGx1Z2luTWFuYWdlbWVudCB7IHJlcG9zaXRvcmllcyB7IGdvb2dsZSgpOyBtYXZlbkNlbnRyYWwoKTsgZ3JhZGxlUGx1Z2luUG9ydGFsKCkgfSB9CmRlcGVuZGVuY3lSZXNvbHV0aW9uTWFuYWdlbWVudCB7IHJlcG9zaXRvcmllc01vZGUuc2V0KFJlcG9zaXRvcmllc01vZGUuRkFJTF9PTl9QUk9KRUNUX1JFUE9TKTsgcmVwb3NpdG9yaWVzIHsgZ29vZ2xlKCk7IG1hdmVuQ2VudHJhbCgpIH0gfQpyb290UHJvamVjdC5uYW1lPSdBaHphclJlZmlnaCc7IGluY2x1ZGUgJzphcHAnCg== | base64 -d > settings.gradle
-          echo cGx1Z2lucyB7IGlkICdjb20uYW5kcm9pZC5hcHBsaWNhdGlvbicgdmVyc2lvbiAnOC42LjEnIGFwcGx5IGZhbHNlIH0K | base64 -d > build.gradle
-          echo cGx1Z2lucyB7IGlkICdjb20uYW5kcm9pZC5hcHBsaWNhdGlvbicgfQphbmRyb2lkIHsgbmFtZXNwYWNlICdjb20ubW9odGFiYS5haHphcnJlZmlnaCc7IGNvbXBpbGVTZGsgMzUKIGRlZmF1bHRDb25maWcgeyBhcHBsaWNhdGlvbklkICdjb20ubW9odGFiYS5haHphcnJlZmlnaCc7IG1pblNkayAyMzsgdGFyZ2V0U2RrIDM1OyB2ZXJzaW9uQ29kZSAxOyB2ZXJzaW9uTmFtZSAnMS4wJyB9Cn0K | base64 -d > app/build.gradle
-          echo PG1hbmlmZXN0IHhtbG5zOmFuZHJvaWQ9Imh0dHA6Ly9zY2hlbWFzLmFuZHJvaWQuY29tL2Fway9yZXMvYW5kcm9pZCI+PHVzZXMtcGVybWlzc2lvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQucGVybWlzc2lvbi5JTlRFUk5FVCIvPjx1c2VzLXBlcm1pc3Npb24gYW5kcm9pZDpuYW1lPSJhbmRyb2lkLnBlcm1pc3Npb24uUE9TVF9OT1RJRklDQVRJT05TIi8+PGFwcGxpY2F0aW9uIGFuZHJvaWQ6dGhlbWU9IkBzdHlsZS9BcHBUaGVtZSIgYW5kcm9pZDpsYWJlbD0i2KfYrdi22KfYsSDYsdmB24zZgiI+PGFjdGl2aXR5IGFuZHJvaWQ6bmFtZT0iLk1haW5BY3Rpdml0eSIgYW5kcm9pZDpleHBvcnRlZD0idHJ1ZSI+PGludGVudC1maWx0ZXI+PGFjdGlvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQuaW50ZW50LmFjdGlvbi5NQUlOIi8+PGNhdGVnb3J5IGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5pbnRlbnQuY2F0ZWdvcnkuTEFVTkNIRVIiLz48L2ludGVudC1maWx0ZXI+PC9hY3Rpdml0eT48L2FwcGxpY2F0aW9uPjwvbWFuaWZlc3Q+Cg== | base64 -d > app/src/main/AndroidManifest.xml
-          echo PHJlc291cmNlcz48c3R5bGUgbmFtZT0iQXBwVGhlbWUiIHBhcmVudD0iYW5kcm9pZDpzdHlsZS9UaGVtZS5NYXRlcmlhbC5MaWdodC5Ob0FjdGlvbkJhciI+PGl0ZW0gbmFtZT0iYW5kcm9pZDpmb250RmFtaWx5Ij5zYW5zPC9pdGVtPjxpdGVtIG5hbWU9ImFuZHJvaWQ6Y29sb3JBY2NlbnQiPiMyNTYzZWI8L2l0ZW0+PC9zdHlsZT48L3Jlc291cmNlcz4K | base64 -d > app/src/main/res/values/styles.xml
-          echo cGFja2FnZSBjb20ubW9odGFiYS5haHphcnJlZmlnaDsKaW1wb3J0IGFuZHJvaWQuYXBwLio7aW1wb3J0IGFuZHJvaWQub3MuKjtpbXBvcnQgYW5kcm9pZC5NYW5pZmVzdDtpbXBvcnQgYW5kcm9pZC5jb250ZW50LnBtLlBhY2thZ2VNYW5hZ2VyO2ltcG9ydCBhbmRyb2lkLndlYmtpdC4qO2ltcG9ydCBhbmRyb2lkLmdyYXBoaWNzLkNvbG9yOwpwdWJsaWMgY2xhc3MgTWFpbkFjdGl2aXR5IGV4dGVuZHMgQWN0aXZpdHl7cHVibGljIHZvaWQgb25DcmVhdGUoQnVuZGxlIGIpe3N1cGVyLm9uQ3JlYXRlKGIpO2lmKEJ1aWxkLlZFUlNJT04uU0RLX0lOVD49MzMmJmNoZWNrU2VsZlBlcm1pc3Npb24oTWFuaWZlc3QucGVybWlzc2lvbi5QT1NUX05PVElGSUNBVElPTlMpIT1QYWNrYWdlTWFuYWdlci5QRVJNSVNTSU9OX0dSQU5URUQpcmVxdWVzdFBlcm1pc3Npb25zKG5ldyBTdHJpbmdbXXtNYW5pZmVzdC5wZXJtaXNzaW9uLlBPU1RfTk9USUZJQ0FUSU9OU30sNyk7V2ViVmlldyB3PW5ldyBXZWJWaWV3KHRoaXMpO3cuc2V0QmFja2dyb3VuZENvbG9yKENvbG9yLnJnYigxMSwxNiwzMikpO3cuZ2V0U2V0dGluZ3MoKS5zZXRKYXZhU2NyaXB0RW5hYmxlZCh0cnVlKTt3LmdldFNldHRpbmdzKCkuc2V0RG9tU3RvcmFnZUVuYWJsZWQodHJ1ZSk7dy5zZXRXZWJWaWV3Q2xpZW50KG5ldyBXZWJWaWV3Q2xpZW50KCkpO3cubG9hZFVybCgiaHR0cHM6Ly9tb2p0YWJhMjIxNi5naXRodWIuaW8vYWh6YXItcmVmaWdoLyIpO3NldENvbnRlbnRWaWV3KHcpO319Cg== | base64 -d > app/src/main/java/com/mojtaba/ahzarrefigh/MainActivity.java
-      - uses: gradle/gradle-build-action@v3
-        with:
-          arguments: assembleDebug
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ahzar-refigh-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
